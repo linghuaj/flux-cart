@@ -2,22 +2,23 @@
 let http = require('http')
 let path = require('path')
 let express = require('express')
+let then = require('express-then')
 // let routes = require('./routes')
 // let config = require('./config')
 // let streamHandler = require('./utils/streamHandler')
-// require('hbs')
+require('hbs')
 
 // Create an express instance and set a port variable
 let app = express();
 let port = process.env.PORT || 8080
 
 // //view engine and default layout
-// app.set('views', path.join(__dirname, 'views'))
-// app.set('view engine', 'hbs')
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'hbs')
 // //layout would be used in routes/render
-// app.set('view options', {
-//     layout: 'main'
-// })
+app.set('view options', {
+    layout: 'main'
+})
 
 // // log every request to the console
 // app.use(morgan('dev'))
@@ -30,7 +31,12 @@ let port = process.env.PORT || 8080
 // routes(app)
 // Set /public as our static content dir
 app.use("/", express.static(__dirname + "/public/"))
-
+app.get('/', then(async(req, res) => {
+  // Render our 'home' template
+  res.render('home', {
+    layout: 'main',
+  })
+}))
 // Fire it up (start our server)
 let server = http.createServer(app).listen(port, () => {
     console.log(`Expresslisten to port ${port}`)

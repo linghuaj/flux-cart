@@ -1,27 +1,39 @@
 {
-  "name": "flux-pricing",
-  "version": "0.0.1",
-  "description": "Pricing component with flux",
+  "name": "react-pricing",
+  "version": "0.0.0",
   "main": "js/app.js",
   "scripts": {
-    "start": "watchify -o js/bundle.js -v -d .",
-    "build": "browserify . | uglifyjs -cm > js/bundle.min.js"
+    "watch": "watchify js/app.js -o public/js/bundle.js -v",
+    "browserify": "browserify js/app.js | uglifyjs > public/js/bundle.js",
+    "build": "npm run browserify ",
+    "start": "npm run watch & nodemon --exec babel-node -- --stage 1 --optional strict -- server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "license": "MIT",
   "dependencies": {
-    "babelify": "^6.1.2",
-    "express": "^4.12.4",
+    "body-parser": "^1.13.1",
+    "express": "^4.9.8",
+    "express-handlebars": "~1.1.0",
+    "express-then": "^1.0.3",
     "flux": "^2.0.0",
-    "react": "^0.12.0",
-    "underscore": "^1.7.0"
+    "hbs": "^3.1.0",
+    "htmlparser": "^1.7.7",
+    "lodash": "^3.9.3",
+    "morgan": "^1.6.0",
+    "phantom": "^0.7.2",
+    "react": "^0.13.3",
+    "request": "^2.58.0",
+    "socket.io": "^1.1.0",
+    "songbird": "^1.0.1"
   },
   "devDependencies": {
-    "browserify": "~6.2.0",
-    "envify": "~3.0.0",
-    "react": "^0.12.0",
-    "reactify": "^0.15",
-    "watchify": "~2.1.0"
+    "babel-runtime": "^5.5.8",
+    "babelify": "^6.1.2",
+    "nodemon": "^1.2.1",
+    "reactify": "~0.14.0",
+    "uglify-js": "~2.4.15",
+    "watchify": "~2.0.0"
   },
-  "author": "Ken Wheeler",
   "browserify": {
     "transform": [
       [
